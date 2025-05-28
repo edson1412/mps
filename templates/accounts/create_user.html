@@ -1,0 +1,59 @@
+{% extends "prison/base.html" %}
+
+{% block title %}Create User{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mb-4">Create New User</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.rank.label_tag }}
+                        {{ form.rank }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.prison_station.label_tag }}
+                        {{ form.prison_station }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create User</button>
+                <a href="{% url 'user_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

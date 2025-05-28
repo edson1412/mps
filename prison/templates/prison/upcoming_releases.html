@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Upcoming Releases Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { margin-bottom: 5px; }
+        .header .subtitle { font-size: 14px; color: #666; }
+        .report-period { text-align: center; margin-bottom: 20px; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        table th, table td { padding: 8px; border: 1px solid #ddd; }
+        table th { background-color: #f5f5f5; text-align: left; }
+        .footer { margin-top: 50px; font-size: 12px; text-align: center; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Malawi Prison Service</h1>
+        <div class="subtitle">Upcoming Releases Report</div>
+    </div>
+    
+    <div class="report-period">
+        Report Period: {{ today|date:"Y-m-d" }} to {{ next_month|date:"Y-m-d" }}
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Prisoner No.</th>
+                <th>Name</th>
+                <th>Prison Station</th>
+                <th>Release Date</th>
+                <th>Original Sentence</th>
+                <th>Offense</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for release in releases %}
+            <tr>
+                <td>{{ release.prisoner.prisoner_number }}</td>
+                <td>{{ release.prisoner.full_name }}</td>
+                <td>{{ release.prisoner.prison_station.name }}</td>
+                <td>{{ release.date_of_release_on_remission|date:"Y-m-d" }}</td>
+                <td>{{ release.sentence }} months</td>
+                <td>{{ release.offense|truncatechars:50 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        Generated on {{ today|date:"Y-m-d" }} by {{ user.get_full_name }} ({{ user.get_rank_display }})
+    </div>
+</body>
+</html>
